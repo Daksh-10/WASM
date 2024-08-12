@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Streaming</title>
+  </head>
+  <body>
+    Streaming
+    <script>
+      function run_wasm() {
+        WebAssembly.instantiateStreaming(fetch("streaming.wasm"), {}).then(
+          (results) => {
+            var a = document.querySelector("#a").value;
+            var result = results.instance.exports.sumOfInts(a);
+
+            document.querySelector("#ret").textContent = result;
+          }
+        );
+      }
+    </script>
+    <input type="number" id="a" />
+    <button onClick="run_wasm()">Trigger</button>
+    <p id="ret"></p>
+  </body>
+</html>

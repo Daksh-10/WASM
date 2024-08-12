@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="wrapping.js"></script>
+  </head>
+  <body>
+    <div>Hello</div>
+    <script>
+      function run_wasm() {
+        var addNums = Module.cwrap(
+          "main",
+          "number",
+          ["number", "number"],
+          [a, b]
+        );
+        // var result = Module.ccall("main", "number", null, null);
+
+        // console.log(result);
+        var a = document.querySelector("#a").value;
+        var b = document.querySelector("#b").value;
+
+        console.log(addNums(a, b));
+      }
+    </script>
+    <input type="number" id="a" />
+    <input type="number" id="b" />
+    <button onClick="run_wasm()">Trigger</button>
+  </body>
+</html>
